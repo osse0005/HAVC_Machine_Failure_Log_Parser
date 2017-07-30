@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{510753D7-9689-4447-8D5F-C5DFFCEBB76C}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="csvParser/Program.cs">
+    <Files>
+      <File FileName="csvParser/Program.cs" Line="15" Column="1" />
+      <File FileName="csvParser/IEventCounter.cs" Line="37" Column="17" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.csvParser PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

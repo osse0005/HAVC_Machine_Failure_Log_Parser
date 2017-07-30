@@ -1,0 +1,5 @@
+/Users/Tim/Documents/csvParser/csvParser/bin/Debug/csvParser.exe
+/Users/Tim/Documents/csvParser/csvParser/bin/Debug/csvParser.pdb
+/Users/Tim/Documents/csvParser/csvParser/obj/x86/Debug/csvParser.csproj.CoreCompileInputs.cache
+/Users/Tim/Documents/csvParser/csvParser/obj/x86/Debug/csvParser.exe
+/Users/Tim/Documents/csvParser/csvParser/obj/x86/Debug/csvParser.pdb
