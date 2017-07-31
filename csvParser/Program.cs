@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace csvParser
 {
@@ -9,16 +10,33 @@ namespace csvParser
     {
         public static void Main(string[] args)
         {
-            //Console.WriteLine("Hello World!");
+            
+            Console.WriteLine("Enter Device ID:");
+            String deviceID;
+            deviceID = Console.ReadLine();
 
-            var parser = new Parser();
+            if (!string.IsNullOrEmpty(deviceID))
+            {
+                var now = DateTime.UtcNow;
+                Stopwatch testTime = new Stopwatch();
+                testTime.Start();
 
-            string deviceID = "dev1";
-            StreamReader reader = new StreamReader("machine1DataLog.csv");
-            parser.ParseEvents(deviceID, reader);
+                var parser = new Parser();
 
-			int eventCount = parser.GetEventCount("Testing");
-            Console.WriteLine("Event Count =" +eventCount);
+                StreamReader reader = new StreamReader(deviceID + "_DataLog.csv");
+                parser.ParseEvents(deviceID, reader);
+
+                int eventCount = parser.GetEventCount(deviceID);
+                testTime.Stop();
+                Console.WriteLine("Event Count =" + eventCount);
+
+                using (StreamWriter eventLogResults = (File.Exists(deviceID + "EventLogResult.csv")) ? File.AppendText(deviceID + "EventLogResult.csv") : File.CreateText(deviceID + "EventLogResult.csv"))
+                {
+
+                    eventLogResults.WriteLine("deviceID=" + deviceID + "eventCount:" + eventCount + "timeTested:" + now + "processingDuration:" + testTime.Elapsed);
+                    eventLogResults.Close();
+                }
+            }
 		}
     }
 
@@ -30,8 +48,6 @@ namespace csvParser
 
         public int GetEventCount(string deviceID)
         {
-            // Console.WriteLine("GetEventCount Hit");
-            // return 0;
             string dateFormat = "yyyy-MM-dd H:mm:ss";
             CultureInfo provider = CultureInfo.InvariantCulture;
 
@@ -41,7 +57,6 @@ namespace csvParser
 
 			foreach (KeyValuePair<string, int> pair in list)
 			{
-                Console.WriteLine("KeyTimeToConvert:"+ pair.Key+"Result:");
                 DateTime logTime = DateTime.ParseExact(pair.Key, dateFormat, provider);
 
                 if(pair.Value == 3 && eventStart != true){
@@ -75,7 +90,6 @@ namespace csvParser
 
         public void ParseEvents(string deviceID, StreamReader eventLog)
         {
-            Console.WriteLine("ParseEventHit");
             string currentLine;
             while((currentLine = eventLog.ReadLine()) != null){
                 Console.WriteLine(currentLine);
@@ -94,7 +108,7 @@ namespace csvParser
 				  Console.WriteLine("Time:"+ pair.Key);
 				  Console.WriteLine("Value:" + pair.Value);
 			  }  */
-
+            /*
 			string dateFormat = "yyyy-MM-dd H:mm:ss";
 			CultureInfo provider = CultureInfo.InvariantCulture;
 
@@ -105,7 +119,7 @@ namespace csvParser
             Console.WriteLine("TimeDif:" + difference.Minutes);
 
 			var fiveMinutes = new TimeSpan(0, 5, 0);
-			Console.WriteLine("FiveMinutes:" + fiveMinutes);
+			Console.WriteLine("FiveMinutes:" + fiveMinutes); */
         }
     }
 }
